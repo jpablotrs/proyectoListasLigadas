@@ -75,6 +75,7 @@ class ListaReproduccion{
 		void pedirDatos(){
 			switch(prioridad){
 				case 1:
+<<<<<<< HEAD
 					fflush(stdin);
 					cout<<"Titulo: ";
 					getline (cin, tituloAux);
@@ -113,6 +114,32 @@ class ListaReproduccion{
 					break;
 			}
 			system("cls");
+=======
+					cout<<"Titulo: ";
+					cin>>tituloAux;
+					cout<<"Cantante: ";
+					cin>>cantanteAux;
+					cout<<"Duracion: ";
+					cin>>duracionAux;
+					break;
+				case 2:
+					cout<<"Cantante: ";
+					cin>>cantanteAux;
+					cout<<"Titulo: ";
+					cin>>tituloAux;
+					cout<<"Duracion: ";
+					cin>>duracionAux;
+					break;
+				case 3:
+					cout<<"Duracion: ";
+					cin>>duracionAux;
+					cout<<"Titulo: ";
+					cin>>tituloAux;
+					cout<<"Cantante: ";
+					cin>>cantanteAux;
+					break;
+			}
+>>>>>>> 84cdace687cf71bd64002cd9d002943a05adec98
 		}
 		
 		void insertar(){
@@ -125,7 +152,10 @@ class ListaReproduccion{
 			if(estaVacia()){
 				p->setSig(NULL);
 				cabeza = p;
+<<<<<<< HEAD
 				return;
+=======
+>>>>>>> 84cdace687cf71bd64002cd9d002943a05adec98
 			}
 			
 			//recorrer la lista para ver donde meter el dato de acuerdo a la prioridad
@@ -145,7 +175,11 @@ class ListaReproduccion{
 								}
 								//se inserta en cualquier otra posicion
 								p->setSig(aux);
+<<<<<<< HEAD
 								ant-> setSig(p);
+=======
+								ant->setSig(p);
+>>>>>>> 84cdace687cf71bd64002cd9d002943a05adec98
 								return;
 							}
 							if(p->getTitulo() == aux->getTitulo()){
@@ -177,6 +211,7 @@ class ListaReproduccion{
 									return;
 								}
 								//se inserta despues del aux
+<<<<<<< HEAD
 								//p->setSig(aux->getSig());
 								//aux->setSig(p);
 								//return;
@@ -186,6 +221,12 @@ class ListaReproduccion{
 								p->setSig(aux->getSig());
 								aux->setSig(p);
 								return;
+=======
+								p->setSig(aux->getSig());
+								aux->setSig(p);
+								return;
+								}
+>>>>>>> 84cdace687cf71bd64002cd9d002943a05adec98
 							}
 							break;
 					case 2:
@@ -230,16 +271,23 @@ class ListaReproduccion{
 									return;
 								}
 								//se inserta despues del aux
+<<<<<<< HEAD
 								//p->setSig(aux->getSig());
 								//aux->setSig(p);
 								//return;
 						    	}
 							}
 							if((p->getTitulo() > aux->getTitulo()) && (aux->getSig() == NULL)){
+=======
+>>>>>>> 84cdace687cf71bd64002cd9d002943a05adec98
 								p->setSig(aux->getSig());
 								aux->setSig(p);
 								return;
 							}
+<<<<<<< HEAD
+=======
+							}
+>>>>>>> 84cdace687cf71bd64002cd9d002943a05adec98
 							break;
 					case 3:
 							if(p->getDuracion() < aux->getDuracion()){
@@ -283,16 +331,23 @@ class ListaReproduccion{
 									return;
 								}
 								//se inserta despues del aux
+<<<<<<< HEAD
 								//p->setSig(aux->getSig());
 								//aux->setSig(p);
 								//return;
 								}
 							}
 							if((p->getTitulo() > aux->getTitulo()) && (aux->getSig() == NULL)){
+=======
+>>>>>>> 84cdace687cf71bd64002cd9d002943a05adec98
 								p->setSig(aux->getSig());
 								aux->setSig(p);
 								return;
 							}
+<<<<<<< HEAD
+=======
+							}
+>>>>>>> 84cdace687cf71bd64002cd9d002943a05adec98
 							break;
 				}
 				ant = aux;
@@ -311,6 +366,7 @@ class ListaReproduccion{
 		
 		void mostrar(){
 			if(estaVacia()){
+<<<<<<< HEAD
 				cout<<"Error, La lista de reproduccion esta vacia"<<endl;
 				return;
 			}
@@ -442,6 +498,22 @@ void menu(ListaReproduccion* li){
 		}
 	}	
 }
+=======
+				cout<<"Error, La lista de reproducción esta vacia";
+				return;
+			}
+			Cancion* p = cabeza;
+			while(p != NULL){
+				//SE DEBEN IMPRIMIR CON UN SWITCH PARA LA Jerarquia
+				
+				
+				p = p->getSig();
+			}
+		}
+		
+};
+
+>>>>>>> 84cdace687cf71bd64002cd9d002943a05adec98
 
 int jerarquiaInsert(){
 	int opc;
