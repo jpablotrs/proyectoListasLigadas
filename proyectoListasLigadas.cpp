@@ -315,32 +315,39 @@ class ListaReproduccion{
 				return;
 			}
 			Cancion* p = cabeza;
+			int cont = 1;
 			switch(prioridad){
 				case 1:
 					while(p != NULL){
-						cout << p->getTitulo()<<endl;
-						cout << p->getCantante()<<endl;
-						cout << p->getDuracion()<<endl;
+						cout << "\n-----Cancion "<<cont<<"-----";
+						cout <<"\nTitulo: "<<p->getTitulo()<<endl;
+						cout <<"\nCantante: "<< p->getCantante()<<endl;
+						cout <<"\nDuracion: "<< p->getDuracion()<<endl;
 						cout << '\n' << '\n';
 						p = p->getSig();
+						cont ++;
 					}
 					break;
 				case 2:
 					while(p != NULL){
-						cout << p->getCantante()<<endl;
-						cout << p->getTitulo()<<endl;
-						cout << p->getDuracion()<<endl;
+						cout << "\n-----Cancion "<<cont<<"-----";
+						cout <<"\nCantante: "<< p->getCantante()<<endl;
+						cout <<"\nTitulo: "<< p->getTitulo()<<endl;
+						cout <<"\nDuracion: "<< p->getDuracion()<<endl;
 						cout << '\n' << '\n';
 						p = p->getSig();
+						cont ++;
 					}
 					break;
 				case 3:
 					while(p != NULL){
-						cout << p->getDuracion()<<endl;
-						cout << p->getTitulo()<<endl;
-						cout << p->getCantante()<<endl;
+						cout << "\n-----Cancion "<<cont<<"-----";
+						cout <<"\nDuracion: "<< p->getDuracion()<<endl;
+						cout <<"\nTitulo: "<< p->getTitulo()<<endl;
+						cout <<"\nCantante: "<< p->getCantante()<<endl;
 						cout << '\n' << '\n';
 						p = p->getSig();
+						cont ++;
 					}
 					break;
 			}
@@ -357,6 +364,7 @@ class ListaReproduccion{
 				if(aux==NULL && (p->getTitulo() == tit)){
 					cabeza = p->getSig();
 					delete p;
+					cout<<endl<<"Cancion eliminada\n";
 					return;
 				}else if(p->getTitulo() == tit){
 					aux->setSig(p->getSig());
@@ -366,6 +374,7 @@ class ListaReproduccion{
 				aux = p;
 				p = p->getSig();
 			}
+			cout<<endl<<"Cancion no encontrada\n";
 		}
 		
 		void eliminarCancionCantante(string can){
@@ -379,6 +388,7 @@ class ListaReproduccion{
 				if(aux==NULL && (p->getCantante() == can)){
 					cabeza = p->getSig();
 					delete p;
+					cout<<endl<<"Cancion eliminada\n";
 					return;
 				}else if(p->getCantante() == can){
 					aux->setSig(p->getSig());
@@ -388,6 +398,7 @@ class ListaReproduccion{
 				aux = p;
 				p = p->getSig();
 			}
+			cout<<endl<<"Cancion no encontrada\n";
 		}
 		
 		void eliminarCancionDuracion(int dur){
@@ -401,6 +412,7 @@ class ListaReproduccion{
 				if(aux==NULL && (p->getDuracion() == dur)){
 					cabeza = p->getSig();
 					delete p;
+					cout<<endl<<"Cancion eliminada\n";
 					return;
 				}else if(p->getDuracion() == dur){
 					aux->setSig(p->getSig());
@@ -410,15 +422,31 @@ class ListaReproduccion{
 				aux = p;
 				p = p->getSig();
 			}
+			cout<<endl<<"Cancion no encontrada\n";
+		}
+		
+		string convertirMinusculas(string aux){
+			for(int i = 0 ; i < aux.length() ; i++){
+				aux[i] = tolower(aux[i]);
+				cout << aux[i];	
+			}
+			return aux;
 		}
 		
 };
 
 void menu(ListaReproduccion* li){
 	int opc = 1;
-	while(opc>0 && opc<7){
+	string busqueda;
+	int busquedaInt;
+	while(opc!=6){
 		cout << "1. Insertar cancion."<<'\n'<<"2. Mostrar lista."<<'\n'<<"3. Eliminar cancion por titulo."<<'\n'<<"4. Eliminar cancion por cantante."<<'\n'<<"5. Eliminar cancion por duracion."<<'\n'<<"6. Salir"<<endl;	
 		cin >> opc;
+		
+		if(opc>6 || opc<1)
+			cout<<"\n\tValor incorrecto, intenta nuevamente\n";
+			
+			
 		switch(opc){
 			case 1:
 				li->pedirDatos();
@@ -428,25 +456,33 @@ void menu(ListaReproduccion* li){
 				li->mostrar();
 				break;
 			case 3:
-				li->eliminarCancionTitulo("or nah");
+				cout<<"Titulo a eliminar: ";
+				fflush(stdin);
+				getline (cin, busqueda);
+				li->eliminarCancionTitulo(busqueda);
 				break;
 			case 4: 
-				li->eliminarCancionCantante("peso pluma");
+				cout<<"Cantante a eliminar: ";
+				fflush(stdin);
+				getline (cin, busqueda);
+				li->eliminarCancionCantante(busqueda);
 				break;
 			case 5: 
-				li->eliminarCancionDuracion(241);
-				break;
-			case 6:
-				opc = 0;
+				cout<<"Duracion a eliminar: ";
+				cin>>busquedaInt;
+				li->eliminarCancionDuracion(busquedaInt);
 				break;
 		}
+		cout<<endl<<endl;
+			system("pause");
+			system("cls");
 	}	
 }
 
 int jerarquiaInsert(){
 	int opc;
 	do{
-		cout << "Como quieres meter lo datos de las canciones: "<<endl;
+		cout << "Como quieres ingresar y ordenar lo datos de las canciones: "<<endl;
 		cout << "1. Por titulo."<<'\n'<<"2. Por cantante."<<'\n'<<"3. Por duracion."<<endl;
 		cin >> opc;
 	}while(opc<1 || opc>3);
@@ -471,7 +507,12 @@ int main(){
 	ListaReproduccion* li = new ListaReproduccion(prio);
 	cancionesIniciales(li);
 	menu(li);
-	
+	//RESTRICCIONES
+	//1. INGRESAR DURACIONES MAYOR A CERO
+	//2. TITULO Y CANTANTE NO DEBE SER CADENA VACIA
+	//3. EN LAS OPCIONES DEL MENU NO SE PUEDEN INGRESAR CARACTERES
+	//4. AL ELIMINAR E INSERTAR NO SE DEBEN METER CARACTERES EN LA DURACION
+	//   NI CADENAS VACIAS
 	
 	return 0;
 }
