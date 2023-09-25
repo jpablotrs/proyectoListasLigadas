@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
 
@@ -75,44 +74,39 @@ class ListaReproduccion{
 		void pedirDatos(){
 			switch(prioridad){
 				case 1:
-					fflush(stdin);
+					cin.ignore();
 					cout<<"Titulo: ";
 					getline (cin, tituloAux);
-					fflush(stdin);
 					cout<<"Cantante: ";
 					getline (cin, cantanteAux);
-					fflush(stdin);
 					cout<<"Duracion: ";
 					cin >> duracionAux;
 					cout << endl << endl;
 					break;
 				case 2:
-					fflush(stdin);
+					
+					cin.ignore();
 					cout<<"Cantante: ";
 					getline (cin, cantanteAux);
-					fflush(stdin);
 					cout<<"Titulo: ";
 					getline (cin, tituloAux);
-					fflush(stdin);
 					cout<<"Duracion: ";
 					cin >> duracionAux;
 					cout << endl << endl;
 					break;
 				case 3:
-					fflush(stdin);
+					
 					cout<<"Duracion: ";
 					cin>>duracionAux;
-					fflush(stdin);
+					cin.ignore();
 					cout<<"Titulo: ";
 					getline (cin, tituloAux);
-					fflush(stdin);
 					cout<<"Cantante: ";
 					getline (cin, cantanteAux);
-					fflush(stdin);
 					cout << endl << endl;
 					break;
 			}
-			system("cls");
+			
 		}
 		
 		void insertar(){
@@ -136,60 +130,21 @@ class ListaReproduccion{
 			while(aux!=NULL){
 				switch(prioridad){
 					case 1:
-							if(p->getTitulo().compare(aux->getTitulo()) < 0){
-								if(ant==NULL){
-									//SE INSERTA EN LA PRIMER POSICION Y SE ACTUALIZA CABEZA
-									p->setSig(aux);
-									cabeza = p;
-									return;
-								}
-								//se inserta en cualquier otra posicion
+						if(p->getTitulo() < aux->getTitulo()){
+							if(ant==NULL){
+								//SE INSERTA EN LA PRIMER POSICION Y SE ACTUALIZA CABEZA
 								p->setSig(aux);
-								ant-> setSig(p);
+								cabeza = p;
 								return;
 							}
-							if(p->getTitulo() == aux->getTitulo()){
-								//SE REVISAN LOS DEMAS PARAMETROS
-								if(p->getCantante().compare(aux->getCantante()) < 0){
-									if(ant==NULL){
-										//SE INSERTA EN LA PRIMER POSICION Y SE ACTUALIZA CABEZA
-										p->setSig(aux);
-										cabeza = p;
-										return;
-									}
-									//se inserta en cualquier otra posicion
-									p->setSig(aux);
-									ant->setSig(p);
-									return;
-								}
-								if(p->getCantante() == aux->getCantante()){
-								//SE REVISA el ultimo parametro
-								if(p->getDuracion() <= aux->getDuracion()){
-									if(ant==NULL){
-										//SE INSERTA EN LA PRIMER POSICION Y SE ACTUALIZA CABEZA
-										p->setSig(aux);
-										cabeza = p;
-										return;
-									}
-									//se inserta en cualquier otra posicion
-									p->setSig(aux);
-									ant->setSig(p);
-									return;
-								}
-								//se inserta despues del aux
-								//p->setSig(aux->getSig());
-								//aux->setSig(p);
-								//return;
-								}
-							}
-							if((p->getTitulo() > aux->getTitulo()) && (aux->getSig() == NULL)){
-								p->setSig(aux->getSig());
-								aux->setSig(p);
-								return;
-							}
-							break;
-					case 2:
-							if(p->getCantante().compare(aux->getCantante()) < 0){
+							//se inserta en cualquier otra posicion
+							p->setSig(aux);
+							ant-> setSig(p);
+							return;
+						}
+						if(p->getTitulo() == aux->getTitulo()){
+							//SE REVISAN LOS DEMAS PARAMETROS
+							if(p->getCantante() < aux->getCantante()){
 								if(ant==NULL){
 									//SE INSERTA EN LA PRIMER POSICION Y SE ACTUALIZA CABEZA
 									p->setSig(aux);
@@ -202,21 +157,67 @@ class ListaReproduccion{
 								return;
 							}
 							if(p->getCantante() == aux->getCantante()){
-								//SE REVISAN LOS DEMAS PARAMETROS
-								if(p->getTitulo().compare(aux->getTitulo()) < 0){
-									if(ant==NULL){
-										//SE INSERTA EN LA PRIMER POSICION Y SE ACTUALIZA CABEZA
-										p->setSig(aux);
-										cabeza = p;
-										return;
-									}
-									//se inserta en cualquier otra posicion
+							//SE REVISA el ultimo parametro
+							if(p->getDuracion() <= aux->getDuracion()){
+								if(ant==NULL){
+									//SE INSERTA EN LA PRIMER POSICION Y SE ACTUALIZA CABEZA
 									p->setSig(aux);
-									ant->setSig(p);
+									cabeza = p;
 									return;
 								}
-								if(p->getTitulo() == aux->getTitulo()){
-								//SE REVISA el ultimo parametro
+								//se inserta en cualquier otra posicion
+								p->setSig(aux);
+								ant->setSig(p);
+								return;
+							}
+							if (p->getDuracion()>aux->getDuracion() && aux->getSig()==NULL){
+								p->setSig(aux->getSig());
+								aux->setSig(p);
+								return;
+							}
+							
+							}
+							if(p->getCantante()>aux->getCantante() && aux->getSig()==NULL){
+								p->setSig(aux->getSig());
+								aux->setSig(p);
+								return;
+							}
+						}
+						if((p->getTitulo() > aux->getTitulo()) && (aux->getSig() == NULL)){
+							p->setSig(aux->getSig());
+							aux->setSig(p);
+							return;
+						}
+						break;
+					case 2:
+						if(p->getCantante()<aux->getCantante()){
+							if(ant==NULL){
+								//SE INSERTA EN LA PRIMER POSICION Y SE ACTUALIZA CABEZA
+								p->setSig(aux);
+								cabeza = p;
+								return;
+							}
+							//se inserta en cualquier otra posicion
+							p->setSig(aux);
+							ant->setSig(p);
+							return;
+						}
+						if(p->getCantante() == aux->getCantante()){
+							//SE REVISAN LOS DEMAS PARAMETROS
+							if(p->getTitulo()<aux->getTitulo()){
+								if(ant==NULL){
+									//SE INSERTA EN LA PRIMER POSICION Y SE ACTUALIZA CABEZA
+									p->setSig(aux);
+									cabeza = p;
+									return;
+								}
+								//se inserta en cualquier otra posicion
+								p->setSig(aux);
+								ant->setSig(p);
+								return;
+							}
+							if(p->getTitulo() == aux->getTitulo()){
+							//SE REVISA el ultimo parametro
 								if(p->getDuracion() <= aux->getDuracion()){
 									if(ant==NULL){
 										//SE INSERTA EN LA PRIMER POSICION Y SE ACTUALIZA CABEZA
@@ -230,12 +231,19 @@ class ListaReproduccion{
 									return;
 								}
 								//se inserta despues del aux
-								//p->setSig(aux->getSig());
-								//aux->setSig(p);
-								//return;
+								if (p->getDuracion()>aux->getDuracion() && aux->getSig()==NULL){
+									p->setSig(aux->getSig());
+									aux->setSig(p);
+									return;
+								}
 						    	}
+						    	if((p->getTitulo() > aux->getTitulo()) && (aux->getSig() == NULL)){
+									p->setSig(aux->getSig());
+									aux->setSig(p);
+									return;
+								}
 							}
-							if((p->getTitulo() > aux->getTitulo()) && (aux->getSig() == NULL)){
+							if((p->getCantante() > aux->getCantante()) && (aux->getSig() == NULL)){
 								p->setSig(aux->getSig());
 								aux->setSig(p);
 								return;
@@ -256,7 +264,7 @@ class ListaReproduccion{
 							}
 							if(p->getDuracion() == aux->getDuracion()){
 								//SE REVISAN LOS DEMAS PARAMETROS
-								if(p->getTitulo().compare(aux->getTitulo()) < 0){
+								if(p->getTitulo()<aux->getTitulo()){
 									if(ant==NULL){
 										//SE INSERTA EN LA PRIMER POSICION Y SE ACTUALIZA CABEZA
 										p->setSig(aux);
@@ -270,7 +278,7 @@ class ListaReproduccion{
 								}
 								if(p->getTitulo() == aux->getTitulo()){
 								//SE REVISA el ultimo parametro
-								if(p->getCantante().compare(aux->getCantante()) < 0){
+								if(p->getCantante()<aux->getCantante()){
 									if(ant==NULL){
 										//SE INSERTA EN LA PRIMER POSICION Y SE ACTUALIZA CABEZA
 										p->setSig(aux);
@@ -282,13 +290,20 @@ class ListaReproduccion{
 									ant->setSig(p);
 									return;
 								}
-								//se inserta despues del aux
-								//p->setSig(aux->getSig());
-								//aux->setSig(p);
-								//return;
+								//se inserta despues del aux si cantante es mayor y no hay mas datos despues
+								if((p->getCantante() > aux->getCantante()) && (aux->getSig() == NULL)){
+									p->setSig(aux->getSig());
+									aux->setSig(p);
+									return;
+								}
+								}
+								if((p->getTitulo() > aux->getTitulo()) && (aux->getSig() == NULL)){
+									p->setSig(aux->getSig());
+									aux->setSig(p);
+									return;
 								}
 							}
-							if((p->getTitulo() > aux->getTitulo()) && (aux->getSig() == NULL)){
+							if (p->getDuracion()>aux->getDuracion() && aux->getSig()==NULL){
 								p->setSig(aux->getSig());
 								aux->setSig(p);
 								return;
@@ -425,13 +440,6 @@ class ListaReproduccion{
 			cout<<endl<<"Cancion no encontrada\n";
 		}
 		
-		string convertirMinusculas(string aux){
-			for(int i = 0 ; i < aux.length() ; i++){
-				aux[i] = tolower(aux[i]);
-				cout << aux[i];	
-			}
-			return aux;
-		}
 		
 };
 
@@ -456,14 +464,14 @@ void menu(ListaReproduccion* li){
 				li->mostrar();
 				break;
 			case 3:
+				cin.ignore();
 				cout<<"Titulo a eliminar: ";
-				fflush(stdin);
 				getline (cin, busqueda);
 				li->eliminarCancionTitulo(busqueda);
 				break;
 			case 4: 
+				cin.ignore();
 				cout<<"Cantante a eliminar: ";
-				fflush(stdin);
 				getline (cin, busqueda);
 				li->eliminarCancionCantante(busqueda);
 				break;
@@ -474,8 +482,8 @@ void menu(ListaReproduccion* li){
 				break;
 		}
 		cout<<endl<<endl;
-			system("pause");
-			system("cls");
+			
+			
 	}	
 }
 
@@ -508,6 +516,7 @@ int main(){
 	cancionesIniciales(li);
 	menu(li);
 	//RESTRICCIONES
+	//0. INGRESAR LA LISTA INICIAL CON NUMEROS POSITIVOS
 	//1. INGRESAR DURACIONES MAYOR A CERO
 	//2. TITULO Y CANTANTE NO DEBE SER CADENA VACIA
 	//3. EN LAS OPCIONES DEL MENU NO SE PUEDEN INGRESAR CARACTERES
