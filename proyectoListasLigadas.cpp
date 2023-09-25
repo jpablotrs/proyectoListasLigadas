@@ -75,34 +75,52 @@ class ListaReproduccion{
 			switch(prioridad){
 				case 1:
 					cin.ignore();
-					cout<<"Titulo: ";
-					getline (cin, tituloAux);
-					cout<<"Cantante: ";
-					getline (cin, cantanteAux);
-					cout<<"Duracion: ";
-					cin >> duracionAux;
+					do{					
+						cout<<"Titulo: ";
+						getline (cin, tituloAux);
+					}while(tituloAux=="");
+					do{
+						cout<<"Cantante: ";
+						getline (cin, cantanteAux);
+					}while(cantanteAux=="");
+					do{
+						cout<<"Duracion: ";
+						cin >> duracionAux;
+					}while(duracionAux<=0);
 					cout << endl << endl;
 					break;
 				case 2:
 					
 					cin.ignore();
-					cout<<"Cantante: ";
-					getline (cin, cantanteAux);
-					cout<<"Titulo: ";
-					getline (cin, tituloAux);
-					cout<<"Duracion: ";
-					cin >> duracionAux;
+					do{
+						cout<<"Cantante: ";
+						getline (cin, cantanteAux);
+					}while(cantanteAux=="");
+					do{					
+						cout<<"Titulo: ";
+						getline (cin, tituloAux);
+					}while(tituloAux=="");
+					do{
+						cout<<"Duracion: ";
+						cin >> duracionAux;
+					}while(duracionAux<=0);
 					cout << endl << endl;
 					break;
 				case 3:
 					
-					cout<<"Duracion: ";
-					cin>>duracionAux;
+					do{
+						cout<<"Duracion: ";
+						cin >> duracionAux;
+					}while(duracionAux<=0);
 					cin.ignore();
-					cout<<"Titulo: ";
-					getline (cin, tituloAux);
-					cout<<"Cantante: ";
-					getline (cin, cantanteAux);
+					do{					
+						cout<<"Titulo: ";
+						getline (cin, tituloAux);
+					}while(tituloAux=="");
+					do{
+						cout<<"Cantante: ";
+						getline (cin, cantanteAux);
+					}while(cantanteAux=="");
 					cout << endl << endl;
 					break;
 			}
@@ -334,7 +352,7 @@ class ListaReproduccion{
 			switch(prioridad){
 				case 1:
 					while(p != NULL){
-						cout << "\n-----Cancion "<<cont<<"-----";
+						cout << "\n<-----Cancion "<<cont<<"----->";
 						cout <<"\nTitulo: "<<p->getTitulo()<<endl;
 						cout <<"\nCantante: "<< p->getCantante()<<endl;
 						cout <<"\nDuracion: "<< p->getDuracion()<<endl;
@@ -345,7 +363,7 @@ class ListaReproduccion{
 					break;
 				case 2:
 					while(p != NULL){
-						cout << "\n-----Cancion "<<cont<<"-----";
+						cout << "\n<-----Cancion "<<cont<<"----->";
 						cout <<"\nCantante: "<< p->getCantante()<<endl;
 						cout <<"\nTitulo: "<< p->getTitulo()<<endl;
 						cout <<"\nDuracion: "<< p->getDuracion()<<endl;
@@ -356,7 +374,7 @@ class ListaReproduccion{
 					break;
 				case 3:
 					while(p != NULL){
-						cout << "\n-----Cancion "<<cont<<"-----";
+						cout << "\n<-----Cancion "<<cont<<"----->";
 						cout <<"\nDuracion: "<< p->getDuracion()<<endl;
 						cout <<"\nTitulo: "<< p->getTitulo()<<endl;
 						cout <<"\nCantante: "<< p->getCantante()<<endl;
@@ -498,9 +516,15 @@ int jerarquiaInsert(){
 }
 
 void cancionesIniciales(ListaReproduccion* li){
-	cout << "Con cuantas canciones quieres comenzar: "<<endl;
 	int cant;
-	cin >> cant;
+	do{
+		cout << "Con cuantas canciones quieres comenzar: "<<endl;
+		cin >> cant;
+		if(cant<0)
+			cout<<"\nError, debes ingresar un numero mayor o igual a 0.\n\n";
+			
+	}while(cant<0);
+	
 	int j = 1;
 	for(int i = 0 ; i < cant ; i++){
 		cout <<"<---"<< " Cancion "<<j<<" --->"<<endl;
@@ -515,13 +539,6 @@ int main(){
 	ListaReproduccion* li = new ListaReproduccion(prio);
 	cancionesIniciales(li);
 	menu(li);
-	//RESTRICCIONES
-	//0. INGRESAR LA LISTA INICIAL CON NUMEROS POSITIVOS
-	//1. INGRESAR DURACIONES MAYOR A CERO
-	//2. TITULO Y CANTANTE NO DEBE SER CADENA VACIA
-	//3. EN LAS OPCIONES DEL MENU NO SE PUEDEN INGRESAR CARACTERES
-	//4. AL ELIMINAR E INSERTAR NO SE DEBEN METER CARACTERES EN LA DURACION
-	//   NI CADENAS VACIAS
 	
 	return 0;
 }
