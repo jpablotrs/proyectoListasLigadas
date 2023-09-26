@@ -9,13 +9,13 @@ class Cancion{
 		int duracion;
 		Cancion* sig;
 	public:
-		cancion(){
+		Cancion(){
 			titulo = "";
 			cantante = "";
 			duracion = 0;
 			sig = NULL;
 		}
-		cancion(string tit, string can, int dur, Cancion* s){
+		Cancion(string tit, string can, int dur, Cancion* s){
 			titulo = tit;
 			cantante = can;
 			duracion = dur;
